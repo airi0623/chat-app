@@ -1,0 +1,77 @@
+.wrapper{
+  height: 100vh;
+  display: flex;
+}
+
+
+/* サイドバー ------------------------------ */
+.side-bar{
+  height: 100vh;
+  width: 300px;
+  background-color: #253141;
+}
+
+.side-bar-header{
+  height: 100px;
+  padding: 0 20px;
+  background-color: #253141;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.header-name a{
+  color: #FAFAFA;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.create-room a{
+  padding: 14px;
+  color: deepskyblue; 
+  font-size: 10px;
+  text-decoration: none;
+  border: 1px solid lightblue;
+}
+
+.rooms{
+  height: calc(100vh - 100px); /* -の後ろ半角開けないといけない */
+  padding : 0 20px;
+  background-color: #2F3E51;
+  overflow: scroll; /* スクロールができるようにする */
+}
+
+.room{
+  padding: 20px 0 40px 0;
+}
+
+.room-name a{       /* 〇〇のaタグと指定したい場合は頭にclassを入れる */
+  color: #FAFAFA;
+  text-decoration: none; 
+}
+
+
+
+/* メインバー ------------------------------ */
+.main-chat{
+  width: calc(100% - 300px);
+  background-color: #ffffff;
+}
+
+.chat-header{
+  height: 100px;
+  padding: 0 40px;
+}
+
+.messages{
+  height: calc(100vh - 190px); /* -の後ろ半角開けないといけない */
+  padding: 46px 40px 0 40px;
+  background-color: #FAFAFA;
+}
+
+.form{
+  height: 90px;
+  padding: 20px 40px 20px 40px;
+  background-color: #DDDDDD;
+}
