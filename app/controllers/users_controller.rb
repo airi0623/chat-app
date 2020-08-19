@@ -12,6 +12,7 @@ class UsersController < ApplicationController
       ridirect_to root_path #
     else
       render :edit # 表示させたいビューのアクション
+    end
   end
 
   private

@@ -2,7 +2,11 @@
 <!-- side-bar-header --->
 <div class="side-bar-header">
   <div class="header-name">
-    <a href="#">Tom</a>
+    <%= link_to edit_user_path(current_user) do %>
+    <!-- pathの後ろに(current_user)きてるのなぜ？ -->
+    <!-- 「edit_user_path」に(current_user)変数を引数としてわたすことで、(current_user)変数に入っているユーザーデータのidを元にリンク先を設定してくれる。-->
+      <%= current_user.name %>
+    <% end %>
   </div>
   <div class="create-room">  
     <a href="#">チャットを作成する</a>
