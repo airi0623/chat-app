@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :imail)
+    params.require(:user).permit(:name, :email)
     # @モデルの前には：がつく？？     こっちはシンボル（キー）
   end
 end
