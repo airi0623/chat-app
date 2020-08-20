@@ -1,7 +1,6 @@
 <!-- chat-header --->
 <div class="chat-header">
   <div class="left-header">
-  <!-- 何故ここにもう一つボックスが存在するんだろう --->
     <div class="header-title">
       hogefuga
     </div>
@@ -14,22 +13,9 @@
 </div>
 
 <div class="messages">
-  <div class="message">
-    <div class="upper-message">
-      <div class="message-user">
-        Taro
-      </div>
-      <div class="message-date">
-        2020/3/31(Web)12:24:45
-      </div>
-    </div>
-    <div class="lower-message">
-      <div class="message-content">
-        おはよう
-      </div>    
-    </div>
-  </div>
+  <%= render partial: 'message', collection: @messages %>
 </div>
+
 <%= form_with model: [@room, @message], html: {class:"form"}, local: true do |f| %>
   <!-- messagesのルーティングがroomsにネストされているため、form_withの引数に@room, @messageの2つを渡している -->
   <!-- 第1引数@roomには「指定のチャットルームのレコード情報」、第2引数@messageには「Messageモデルのからのインスタンス（Message.new）」をあらかじめセットしておく必要がある-->
