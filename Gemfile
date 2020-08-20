@@ -57,3 +57,6 @@ gem 'devise'
 
 gem 'pry-rails'
 # デバックツールとして使われている。
+
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
