@@ -1,12 +1,15 @@
 <div class='chat-room-form'>
   <h1>新規チャットルーム</h1>
   <%=form_with model: @room, local: true do |f|%>
+  <!-- model: @room = Room.new(newはｱｸｼｮﾝじゃなくてﾒｿｯﾄﾞ)roomテーブルのカラのデータ) -->
     <div class='chat-room-form__field'>
       <div class='chat-room-form__field--left'>
         <%= f.label :チャットルーム名, class: 'chat-room-form__label'%>
       </div>
       <div class='chat-room-form__field--right'>
         <%= f.text_field :name, class: 'chat__room_name chat-room-form__input', placeholder: 'チャットルーム名を入力してください'%>
+        <!-- 検証ではこのように出てくる <input class="chat__room_name chat-room-form__input" placeholder="チャットルーム名を入力してください" type="text" name="room[name]" id="room_name"> id-->
+        <!-- :name ←この形(カラム名)が文法。実際は name=room[name] roomという箱にnameが入っている。このroomは@room -->
       </div>
     </div>
     <div class='chat-room-form__field'>
@@ -17,15 +20,23 @@
       </div>
       <div class='chat-room-form__field--right'>
         <select name="room[user_ids][]">
-        <!-- roomテーブルのuser_ids:カラム??  -->
-        <!-- name属性に任意の値を指定することでそのその値をコントローラーへ渡すことができる -->                     
+        <!-- select name= の記載はselectで扱うデータをnameのキー(カラム)へ保存しますよっていうことかな？ -->
+        <!-- room[user_ids][]・・・特殊な記述方法。roomに紐づく中間テーブルのuser_idへ[]の中を保存する /中間テーブルがなければ name=user_idという記述になる -->
+        <!-- []・・・user_idを複数入れるための箱 -->
+        <!-- name属性・・・paramsの一部。ビューからコントローラーへデータを送るために名前をつけた箱が値のこと -->
+        
           <<option value="">チャットするユーザーを選択してください</option>
+          <!-- value="" はなくても問題ないが、カリキュラムではoption valueを1セットとして扱うことが多いのでそのようになっている  -->
             <% User.all.where.not(id: current_user.id).each do |user| %>
+            <!-- userのレコードデータからcurrent_userを覗き、一列づつ取り出してる  -->
               <option value=<%=user.id%>><%= user.name %></option>
-              <!-- userのレコードデータ一列づつ全部持ってきて、その中のnameだけ取り出してる  -->
+              <!-- <%=user.id%> ・・・user.nameを選択した際に、コントローラーへ送られてテーブルへ保存されるデータ -->
+              <!-- user.name・・・カラムに表示されているデータ。このページを読み込んだ際に表示されている。 -->
             <% end %>         
         </select>
         <input name="room[user_ids][]" type="hidden" value=<%=current_user.id%>>
+        <!-- value=<%=current_user.id%> ・・・ { room[user_ids][]: current_user.id }こういうこと -->
+        <!-- type="hidden・・・input要素だけど、フォームの中身じゃなくて隠してるよってこと -->
       </div>
     </div>
     <div class='chat-room-form__field'>
