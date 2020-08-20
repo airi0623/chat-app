@@ -18,6 +18,13 @@ class RoomsController < ApplicationController
       end
   end
 
+  def destroy
+    room = Room.find(params[:id])
+    room.destroy
+    redirect_to root_path
+    #destroyアクションは、削除するだけなのでビューの表示は必要はありません。そのため、インスタンス変数ではなく変数としてroomを定義し、destroyメソッドを使用します。
+  end
+
   private
   def room_params
     params.require(:room).permit(:name, user_ids:[])

@@ -1,42 +1,36 @@
 <!-- chat-header --->
 <div class="chat-header">
   <div class="left-header">
-  <!-- 何故ここにもう一つボックスが存在するんだろう --->
     <div class="header-title">
-      hogefuga
+      <%= @room.name%>
     </div>
   </div>
   <div class="right-header">
     <div class="header-button">
-      <a href="#">チャットを終了する</a>
+      <%= link_to "チャットを終了する" , room_path(@room), method: :delete %>
+      <!-- 削除するチャットルームを区別するために、定義している@roomを引数にし、room_path(@room)と指定しましょう。-->
+
     </div>
   </div>
 </div>
 
 <div class="messages">
-  <div class="message">
-    <div class="upper-message">
-      <div class="message-user">
-        Taro
-      </div>
-      <div class="message-date">
-        2020/3/31(Web)12:24:45
-      </div>
-    </div>
-    <div class="lower-message">
-      <div class="message-content">
-        おはよう
-      </div>    
-    </div>
-  </div>
+  <%= render partial: 'message', collection: @messages %>
 </div>
-<div class="form">
+
+<%= form_with model: [@room, @message], html: {class:"form"}, local: true do |f| %>
+  <!-- messagesのルーティングがroomsにネストされているため、form_withの引数に@room, @messageの2つを渡している -->
+  <!-- 第1引数@roomには「指定のチャットルームのレコード情報」、第2引数@messageには「Messageモデルのからのインスタンス（Message.new）」をあらかじめセットしておく必要がある-->
   <div class="form-input">
-    <input class="form-message" placeholder= "type a message">
+    <%= f.text_field :content, class:"form-message", placeholder: "type a message" %>
+    <!-- 書き換え<input class="form-message" placeholder= "type a message"> -->
     <label class="form-image">
       <span class="image-file">画像</span>
-      <input type="file" class="hidden">
+      <%= f.file_field :image, class:"hidden" %>
+      <!-- 書き換え<input type="file" class="hidden"> -->
     </label>
   </div>
-  <input class="form-submit" type="submit" value="送信">
-</div>
+  <%= f.submit "送信", class:"form-submit" %>
+  <!-- 書き換え<input class="form-submit" type="submit" value="送信">-->
+<% end %>
+
