@@ -17,10 +17,10 @@ class MessagesController < ApplicationController
     end
   end
 
-  private
 
+  private
   def message_params
-    params.require(:message).permit(:content).merge(user_id: current_user.id)
-    # ログインしているユーザーのid（user_id: current_user.id)と紐づいているデータを受け取れるよう許可する。
+    params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
   end
+    # ログインしているユーザーのid（user_id: current_user.id)と紐づいているデータを受け取れるよう許可する。
 end
