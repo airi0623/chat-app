@@ -16,6 +16,16 @@
         <label class='chat-room-form__label' for='chat_room_チャットメンバー'>チャットメンバー</label>
       </div>
       <div class='chat-room-form__field--right'>
+        <select name="room[user_ids][]">
+        <!-- roomテーブルのuser_ids:カラム??  -->
+        <!-- name属性に任意の値を指定することでそのその値をコントローラーへ渡すことができる -->                     
+          <<option value="">チャットするユーザーを選択してください</option>
+            <% User.all.where.not(id: current_user.id).each do |user| %>
+              <option value=<%=user.id%>><%= user.name %></option>
+              <!-- userのレコードデータ一列づつ全部持ってきて、その中のnameだけ取り出してる  -->
+            <% end %>         
+        </select>
+        <input name="room[user_ids][]" type="hidden" value=<%=current_user.id%>>
       </div>
     </div>
     <div class='chat-room-form__field'>
